@@ -1,31 +1,30 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
-
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-
 :root {
-  --font-poppins: "Poppins", sans-serif;
-  --color-primary: #1D283C;
-  --color-primary-dark: #;
-  --color-primary-darker: #;
-  --color-primary-darkest: #;
-  --color-primary-light: #;
-  --color-primary-lighter: #;
-  --color-primary-lightest: #;
-  --color-secondary: #1D283C;
-  --color-tertiary: #1c398e;
-  --color-accent-orange: #FF6A00;
-  --color-accent-orange-light: #ff974d;
+    --font-poppins: "Poppins", sans-serif;
 
-  --color-black-theme: #06080c;
-  --color-white-theme: #e8eaec;
-  --color-grey-dark: #777e8a;
-  --color-grey-darker: #303237;
-  --color-grey-space: #717378;
-  --color-grey-light: #bbbfc5;
+    --color-primary: #38405f;
+    --color-primary-dark: #2f3652;
+    --color-primary-darker: #272c43;
+    --color-primary-darkest: #1e2333;
+    --color-primary-light: #48527a;
+    --color-primary-lighter: #5a6592;
+    --color-primary-lightest: #adb2c9;
+
+    --color-secondary: #cd5334;
+    --color-secondary-dark: #b0492e;
+    --color-secondary-darker: #8e3c27;
+    --color-secondary-darkest: #6b2e1f;
+    --color-secondary-light: #d86c50;
+    --color-secondary-lighter: #e28a74;
+    --color-secondary-lightest: #ebaf9f;
+
+    --color-black-theme: #0b0d13;
+    --color-white-theme: #ebecef;
+    --color-grey-light: #c5c7cc;
+    --color-grey-dark: #70737a;
+    --color-grey-darker: #3f4248;
 }
-
-
