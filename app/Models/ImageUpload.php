@@ -5,9 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Upload extends Model
+class ImageUpload extends Model
 {
     use HasFactory;
-
-    protected $fillable = ['originalName', 'path', 'mimeType'];
+    protected $table = 'images';
+    protected $fillable = ['restaurant_id', 'originalName', 'path', 'mimeType'];
 }

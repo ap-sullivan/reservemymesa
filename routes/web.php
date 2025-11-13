@@ -5,11 +5,23 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Admin\RestaurantController;
 
-// route for returning restaurant info on front page
-Route::get('/', [HomeController::class, 'index']);
+
+// route to home page
+Route::get('/', [HomeController::class, 'index'])->name('home');
+
+
+
+// Route::get('/', [HomeController::class, 'index']);
 
 // route for adding a restuarant page
-Route::get('/create', [RestaurantController::class, 'create'])->name('admin.restaurants].create');
+
+Route::get('admin/create', [RestaurantController::class, 'create'])
+    ->name('admin.restaurants.create');
+
+    Route::post('admin/create', [RestaurantController::class, 'store'])
+    ->name('admin.restaurants.store');
+
+
 
 
 Route::get('/dashboard', function () {
