@@ -39,12 +39,12 @@
         </p>
     </div>
     <div class="p-6 pt-0">
-        <button
-            class="rounded-lg bg-pink-500 py-3 px-6 text-xs font-bold uppercase text-white shadow-md transition-all hover:shadow-lg"
-            type="button"
-        >
-            Reserve
-        </button>
+
+
+
+        <a href="{{ route('restaurants.reservation', ['slug' => $restaurant->slug]) }}" class="rounded-lg bg-pink-500 py-3 px-6 text-xs font-bold uppercase text-white shadow-md transition-all hover:shadow-lg">
+            Make Reservation
+        </a>
     </div>
 </div>
   @endforeach

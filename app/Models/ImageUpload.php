@@ -9,5 +9,5 @@ class ImageUpload extends Model
 {
     use HasFactory;
     protected $table = 'images';
-    protected $fillable = ['restaurant_id', 'originalName', 'path', 'mimeType'];
+    protected $fillable = ['restaurant_id', 'original_name', 'path', 'mime_type'];
 }

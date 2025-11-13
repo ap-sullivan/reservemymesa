@@ -17,11 +17,11 @@ class Restaurant extends Model
     ];
 
     // create slug automaticaly
-     protected static function booted()
-    {
-        static::creating(function ($restaurant) {
-            $restaurant->slug = Str::slug($restaurant->name);
-        });
-    }
+    //  protected static function booted()
+    // {
+    //     static::creating(function ($restaurant) {
+    //         $restaurant->slug = Str::slug($restaurant->name);
+    //     });
+    // }
 
 }

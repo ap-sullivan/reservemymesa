@@ -11,17 +11,28 @@ class RestaurantController extends Controller
 {
 
 
-    // controller for creating a new restaurant as admin
+    // ? passing slugs to URL
+    public function show($slug)
+    {
+        $restaurant = Restaurant::where('slug', $slug)->firstOrFail();
+
+        return view('restaurant.reservation', compact('restaurant'));
+    }
+
+
+    //? controller for creating a new restaurant as admin
     public function create()
     {
         return view('admin.addRestaurant');
     }
 
+
+    //? validating form data on submit/store to db
     public function store(Request $request)
     {
         $validated = $request->validate([
             'name' => 'required|string|max:128',
-            'slug' => 'required|string|max:64',
+            'slug' => ['required', 'string', 'max:64', 'regex:/^[a-z0-9-]+$/'],
             'house_number' => 'nullable|string|max:16',
             'address_line_1' => 'required|string|max:128',
             'address_line_2' => 'nullable|string|max:128',
@@ -34,18 +45,19 @@ class RestaurantController extends Controller
             'main_contact' => 'nullable|string|max:128',
         ]);
 
-     $restaurant = Restaurant::create($validated);
+        // ? create variable to link to restaurant id
+        $restaurant = Restaurant::create($validated);
 
 
-
+        //?  then store image and reference path, names, type and and restaurant id as fk in db
         if ($request->hasFile('path')) {
             $file = $request->file('path');
 
             $upload = new ImageUpload;
-            $upload->mime_type= $file->getMimeType();
+            $upload->mime_type = $file->getMimeType();
             $upload->original_name = $file->getClientOriginalName();
             $upload->path = $file->store('uploads');
-            $upload->restaurant_id = $restaurant->restaurant_id; // link to restaurant
+            $upload->restaurant_id = $restaurant->restaurant_id;
             $upload->save();
         }
         return redirect()->route('admin.restaurants.index')->with('success', 'Restaurant added!');
