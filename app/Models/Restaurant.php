@@ -16,12 +16,5 @@ class Restaurant extends Model
         'name', 'slug', 'house_number', 'address_line_1', 'address_line_2', 'city', 'postcode', 'description', 'email', 'phone', 'main_contact', 'trading'
     ];
 
-    // create slug automaticaly
-    //  protected static function booted()
-    // {
-    //     static::creating(function ($restaurant) {
-    //         $restaurant->slug = Str::slug($restaurant->name);
-    //     });
-    // }
 
 }

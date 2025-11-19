@@ -30,7 +30,7 @@
                  <div class="flex flex-col mb-2">
                     <label for="name" class="mb-1">Restaurant Name</label>
                     <input type="text" name="name" id="name" placeholder="" value="{{ old('name') }}"required
-                        class="w-full h-12 py-2 px-2 rounded bg-white border-2 border-primary text-black placeholder-darkest-grey focus:bg-tertiary-subtle focus:border-2 focus:border-tertiary focus:outline-none" />
+                        class="w-full h-12 py-2 px-2 rounded bg-white border-2 border-secondary-light text-black placeholder-darkest-grey focus:bg-secondary-lightest focus:outline-none focus:border-none focus:ring-secondary-light" />
                 </div>
 
 

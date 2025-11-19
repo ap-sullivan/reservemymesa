@@ -17,13 +17,22 @@ Route::get('/restaurants/{slug}', [RestaurantController::class, 'show'])
     ->name('restaurants.reservation');
 
 
-//? admin route for adding a restaurant page
+//? admin route for adding and storing a new  restaurant page
 
 Route::get('admin/create', [RestaurantController::class, 'create'])
     ->name('admin.restaurants.create');
 
     Route::post('admin/create', [RestaurantController::class, 'store'])
     ->name('admin.restaurants.store');
+
+
+//? admin route for editing a restaurant page
+
+Route::get('admin/edit', [RestaurantController::class, 'edit'])
+    ->name('admin.restaurants.edit');
+
+    // Route::post('admin/edit', [RestaurantController::class, 'store'])
+    // ->name('admin.restaurants.store');
 
 
 //? admin route for dashbord when logged in

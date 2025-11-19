@@ -62,4 +62,18 @@ class RestaurantController extends Controller
         }
         return redirect()->route('admin.restaurants.index')->with('success', 'Restaurant added!');
     }
+
+    // !!!  EDITING
+
+        //? controller for editing a new restaurant as admin
+    public function edit()
+    {
+       $restaurants = Restaurant::all(); 
+
+    return view('admin.editRestaurant', compact('restaurants'));
+
+    }
+
+
+
 }
