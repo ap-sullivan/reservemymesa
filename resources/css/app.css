@@ -28,3 +28,10 @@
     --color-grey-dark: #70737a;
     --color-grey-darker: #3f4248;
 }
+
+
+.required::after {
+    content: " *";
+    color: #EF4444;
+
+}

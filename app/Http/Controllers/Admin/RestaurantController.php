@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\ImageUpload;
+use App\Models\Cuisine;
 use App\Models\Restaurant;
 use Illuminate\Http\Request;
 
@@ -11,7 +12,7 @@ class RestaurantController extends Controller
 {
 
 
-    // ? passing slugs to URL
+    // ? passing slugs to URL to view reservation page
     public function show($slug)
     {
         $restaurant = Restaurant::where('slug', $slug)->firstOrFail();
@@ -21,10 +22,14 @@ class RestaurantController extends Controller
 
 
     //? controller for creating a new restaurant as admin
+
     public function create()
-    {
-        return view('admin.addRestaurant');
-    }
+{
+    $cuisines = Cuisine::all();
+    return view('admin.addRestaurant', compact('cuisines'));
+}
+
+
 
 
     //? validating form data on submit/store to db
@@ -65,14 +70,23 @@ class RestaurantController extends Controller
 
     // !!!  EDITING
 
-        //? controller for editing a new restaurant as admin
-    public function edit()
+        //? show all on page
+    public function index()
     {
-       $restaurants = Restaurant::all(); 
+       $restaurants = Restaurant::all();
 
-    return view('admin.editRestaurant', compact('restaurants'));
+    return view('admin.viewRestaurants', compact('restaurants'));
 
     }
+
+         //? controller for editing a restaurant as admin
+
+    public function edit($id)
+{
+    $restaurant = Restaurant::findOrFail($id);
+    $cuisines = Cuisine::all();
+    return view('admin.editRestaurant', compact('restaurant', 'cuisines'));
+}
 
 
 

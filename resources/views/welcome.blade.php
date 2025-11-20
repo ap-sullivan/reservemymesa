@@ -16,7 +16,7 @@
     <!-- Page Content -->
     <main class=" min-h-screen p-16">
 
-
+<p class="text-white mb-4"> TODO : add a JS frontend filter by cuisine and city</p>
 
  {{-- card container --}}
 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12">
@@ -31,10 +31,14 @@
         />
     </div>
     <div class="p-6">
-       <h5 class="mb-2 text-xl font-semibold text-blue-gray-900">
+       <h5 class="text-xl font-semibold text-blue-gray-900 mb-1">
                     {{ $restaurant->name }}
-                </h5>
-        <p class="text-base font-light leading-relaxed">
+        </h5>
+        <p class="text-sm mb-2">
+            <span class="mr-2">{{ $restaurant->cuisine_type }}</span>&#x2022;<span class="ml-2">{{ $restaurant->city }}</span>
+            </p>
+
+        <p class="text-sm font-light leading-relaxed">
             {{ $restaurant->description }}
         </p>
     </div>
@@ -47,6 +51,7 @@
         </a>
     </div>
 </div>
+
   @endforeach
 
 </div>
