@@ -29,6 +29,7 @@ class LoginRequest extends FormRequest
         return [
             'email' => ['required', 'string', 'email'],
             'password' => ['required', 'string'],
+            'admin_code' => ['nullable', 'string'],
         ];
     }
 
@@ -48,6 +49,27 @@ class LoginRequest extends FormRequest
                 'email' => trans('auth.failed'),
             ]);
         }
+
+        // extra steps for athorising an admin user checking aagainst db taht the role == admin and the secret code matches the user if user is admin
+           $user = Auth::user();
+
+            $requestAdmin = $this->filled('admin_code');
+
+            if ($requestAdmin) {
+                if ($user->role !== 'admin') {
+                    Auth::logout();
+                  throw ValidationException::withMessages([
+                'admin_code' => __('You are not authorised.'),
+            ]);
+                }
+
+                if ($this->input('admin_code') !== $user->admin_code) {
+                     Auth::logout();
+                  throw ValidationException::withMessages([
+                'admin_code' => __('Invalid admin code'),
+                    ]);
+                }
+            }
 
         RateLimiter::clear($this->throttleKey());
     }
