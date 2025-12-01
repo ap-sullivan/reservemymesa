@@ -50,16 +50,16 @@ class LoginRequest extends FormRequest
             ]);
         }
 
-        // extra steps for athorising an admin user checking aagainst db taht the role == admin and the secret code matches the user if user is admin
+        // extra steps for athorising an admin user checking aagainst db that the role == admin and the secret code matches the user if user is admin
+
            $user = Auth::user();
 
-            $requestAdmin = $this->filled('admin_code');
+           if ($user->role === 'admin') {
 
-            if ($requestAdmin) {
-                if ($user->role !== 'admin') {
+            if (! $this->filled('admin_code')) {
                     Auth::logout();
                   throw ValidationException::withMessages([
-                'admin_code' => __('You are not authorised.'),
+                'admin_code' => __('Admin code required'),
             ]);
                 }
 

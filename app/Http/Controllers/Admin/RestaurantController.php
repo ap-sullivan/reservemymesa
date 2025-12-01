@@ -58,10 +58,12 @@ class RestaurantController extends Controller
         if ($request->hasFile('path')) {
             $file = $request->file('path');
 
+            // dd($request->file('path'));
+
             $upload = new ImageUpload;
             $upload->mime_type = $file->getMimeType();
             $upload->original_name = $file->getClientOriginalName();
-            $upload->path = $file->store('uploads');
+           $upload->path = $file->store('uploads', 'public');
             $upload->restaurant_id = $restaurant->restaurant_id;
             $upload->save();
         }

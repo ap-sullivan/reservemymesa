@@ -10,7 +10,12 @@ return new class extends Migration
      * Run the migrations.
      */
     public function up(): void
+
     {
+
+         Schema::dropIfExists('reservations');
+
+         
         Schema::create('restaurants', function (Blueprint $table) {
             $table->id('restaurant_id');
             $table->string('name', 128);

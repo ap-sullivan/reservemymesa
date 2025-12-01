@@ -21,4 +21,16 @@ class Restaurant extends Model
     {
         return $this->belongsTo(Cuisine::class, 'cuisine_id', 'id');
     }
+
+    // refercne images table
+     public function images()
+    {
+        return $this->hasMany(ImageUpload::class, 'restaurant_id', 'restaurant_id');
+    }
+
+    // reference to customer
+    public function customer()
+{
+    return $this->belongsTo(User::class, 'customer_id');
+}
 }
