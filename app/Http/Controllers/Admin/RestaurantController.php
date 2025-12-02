@@ -132,6 +132,19 @@ public function update(Request $request, $id)
         ->with('success', 'Restaurant updated successfully.');
 }
 
+// ? deleting a restaurant
 
+public function destroy($restaurant_id)
+{
+    $restaurant = Restaurant::findOrFail($restaurant_id);
+    $restaurant->delete();
+
+    return redirect()
+        ->route('admin.restaurants.index')
+        ->with('success', 'Restaurant deleted successfully.');
+}
 
 }
+
+
+

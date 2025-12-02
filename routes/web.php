@@ -22,7 +22,6 @@ Route::get('/restaurants/{slug}', [RestaurantController::class, 'show'])
 
 //? admin route for adding and storing a new restaurant page
 
-
 Route::get('admin/create', [RestaurantController::class, 'create'])
     ->name('admin.restaurants.create')
     ->middleware(['auth', AdminMiddleware::class]);
@@ -47,21 +46,18 @@ Route::put('/admin/restaurants/{id}', [RestaurantController::class, 'update'])
     ->name('admin.restaurants.update')
     ->middleware(['auth', AdminMiddleware::class]);
 
-
-
-//? admin route for dashbord when logged in = NEED TO LOOK AT
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// ? admin route for deleting a restuarant
+Route::delete('/admin/restaurants/{id}', [RestaurantController::class, 'destroy'])
+    ->name('admin.restaurants.destroy')
+    ->middleware(['auth', AdminMiddleware::class]);
 
 
 // ? Reservations route
+
 Route::middleware('auth')->post('/reservations', [ReservationController::class, 'store'])
     ->name('reservations.store');
 
-
-    // ? confirmation route
+// ? reservation confirmation route
 Route::get('/reservation/confirmation', function () {
     return view('restaurant.confirmation');
 })->name('reservations.confirmation');
