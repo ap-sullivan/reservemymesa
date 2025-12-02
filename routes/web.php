@@ -54,7 +54,7 @@ Route::delete('/admin/restaurants/{id}', [RestaurantController::class, 'destroy'
 
 // ? Reservations route
 
-Route::middleware('auth')->post('/reservations', [ReservationController::class, 'store'])
+Route::middleware('auth', 'verified')->post('/reservations', [ReservationController::class, 'store'])
     ->name('reservations.store');
 
 // ? reservation confirmation route
@@ -72,3 +72,16 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+
+// test email
+
+// use Illuminate\Support\Facades\Mail;
+
+// Route::get('/test-email', function () {
+//     Mail::raw('This is a test.', function ($message) {
+//         $message->to('mesa.app.mail@gmail.com')->subject('Test Email');
+//     });
+
+//     return 'Email sent!';
+// });

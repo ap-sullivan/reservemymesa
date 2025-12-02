@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Mail;
+use App\Mail\ReservationConfirmed;
 use Illuminate\Http\Request;
 use App\Models\Reservation;
 use Illuminate\Support\Facades\Auth;
@@ -19,7 +21,7 @@ class ReservationController extends Controller
             'requests'          => 'nullable|string',
         ]);
 
-        Reservation::create([
+        $reservation = Reservation::create([
             'restaurant_id'    => $validated['restaurant_id'],
             'customer_id'      => Auth::id(),
             'reservation_date' => $validated['reservation_date'],
@@ -27,6 +29,10 @@ class ReservationController extends Controller
             'pax_count'        => $validated['pax_count'],
             'requests'         => $validated['requests'] ?? null,
         ]);
+
+          // send confirmation email
+   Mail::to(Auth::user()->email)
+        ->send(new ReservationConfirmed($reservation));
 
      return redirect()
     ->route('reservations.confirmation')
