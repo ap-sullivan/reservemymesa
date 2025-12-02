@@ -33,7 +33,7 @@ Route::post('admin/create', [RestaurantController::class, 'store'])
     ->middleware(['auth', AdminMiddleware::class]);
 
 
-//? admin route for editing a restaurant page
+//? admin route for editing and updating a restaurant page
 
 Route::get('/admin/restaurants', [RestaurantController::class, 'index'])
     ->name('admin.restaurants.index')
@@ -43,9 +43,10 @@ Route::get('/admin/restaurants/{id}/edit', [RestaurantController::class, 'edit']
     ->name('admin.restaurants.edit')
     ->middleware(['auth', AdminMiddleware::class]);
 
+Route::put('/admin/restaurants/{id}', [RestaurantController::class, 'update'])
+    ->name('admin.restaurants.update')
+    ->middleware(['auth', AdminMiddleware::class]);
 
-    // Route::post('admin/edit', [RestaurantController::class, 'store'])
-    // ->name('admin.restaurants.store');
 
 
 //? admin route for dashbord when logged in = NEED TO LOOK AT
@@ -56,7 +57,7 @@ Route::get('/dashboard', function () {
 
 
 // ? Reservations route
-Route::post('/reservations', [ReservationController::class, 'store'])
+Route::middleware('auth')->post('/reservations', [ReservationController::class, 'store'])
     ->name('reservations.store');
 
 

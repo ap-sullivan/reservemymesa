@@ -91,5 +91,47 @@ class RestaurantController extends Controller
 }
 
 
+//  ? Updating/submitting the updated restauarnt
+public function update(Request $request, $id)
+{
+    $restaurant = Restaurant::findOrFail($id);
+
+    // Validate incoming form data
+    $validated = $request->validate([
+        'name' => 'required|string|max:128',
+        'slug' => ['required', 'string', 'max:64', 'regex:/^[a-z0-9-]+$/'],
+        'house_number' => 'nullable|string|max:16',
+        'address_line_1' => 'required|string|max:128',
+        'address_line_2' => 'nullable|string|max:128',
+        'city' => 'required|string|max:64',
+        'postcode' => 'required|string|max:16',
+        'description' => 'required|string|max:1000',
+        'cuisine_type' => 'required|string|max:128',
+        'email' => 'required|email',
+        'phone' => 'nullable|string|max:20',
+        'main_contact' => 'nullable|string|max:128',
+    ]);
+
+
+    $restaurant->update($validated);
+
+    // update image if new one added
+    if ($request->hasFile('path')) {
+        $file = $request->file('path');
+
+        $upload = new ImageUpload;
+        $upload->mime_type = $file->getMimeType();
+        $upload->original_name = $file->getClientOriginalName();
+        $upload->path = $file->store('uploads', 'public');
+        $upload->restaurant_id = $restaurant->restaurant_id;
+        $upload->save();
+    }
+
+    return redirect()
+        ->route('admin.restaurants.index')
+        ->with('success', 'Restaurant updated successfully.');
+}
+
+
 
 }

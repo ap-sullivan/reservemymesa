@@ -35,12 +35,15 @@
                 phone:'{{ old('phone', $restaurant->phone)}}',
                 main_contact:'{{ old('main_contact', $restaurant->main_contact)}}'
                 }"
-                  method="POST" enctype="multipart/form-data" action="{{ route('admin.restaurants.store')}}"
+                  method="POST" enctype="multipart/form-data"
+                  action="{{ route('admin.restaurants.update', $restaurant->restaurant_id) }}"
+
              class="w-full max-w-2xl bg-white shadow-lg rounded-lg p-8 space-y-6 border border-primary">
 
 
             {{-- cross site request forgery protection  --}}
             @csrf
+            @method('PUT')
 
                  <div class="flex flex-col mb-2">
                     <label for="name" class="mb-1 required">Restaurant Name</label>

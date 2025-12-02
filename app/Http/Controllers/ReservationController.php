@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Reservation;
+use Illuminate\Support\Facades\Auth;
 
 class ReservationController extends Controller
 {
@@ -20,7 +21,7 @@ class ReservationController extends Controller
 
         Reservation::create([
             'restaurant_id'    => $validated['restaurant_id'],
-            'customer_id'      => auth()->id(),
+            'customer_id'      => Auth::id(),
             'reservation_date' => $validated['reservation_date'],
             'reservation_time' => $validated['reservation_time'],
             'pax_count'        => $validated['pax_count'],
