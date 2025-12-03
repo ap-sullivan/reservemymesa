@@ -36,10 +36,8 @@
 
             <!-- Page Content -->
             <main>
-                @yield('content')
-
-            </main>
-        </div>
+    {{ $slot }}
+</main>
 
         @yield('scripts')
     </body>

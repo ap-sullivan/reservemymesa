@@ -46,7 +46,12 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return [
             'email_verified_at' => 'datetime',
-            'password' => 'hashed',
+            'password' => 'hashed', 
         ];
     }
+
+    public function reservations()
+{
+    return $this->hasMany(\App\Models\Reservation::class, 'customer_id');
+}
 }

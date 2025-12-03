@@ -74,14 +74,6 @@ Route::middleware('auth')->group(function () {
 require __DIR__.'/auth.php';
 
 
-// test email
-
-// use Illuminate\Support\Facades\Mail;
-
-// Route::get('/test-email', function () {
-//     Mail::raw('This is a test.', function ($message) {
-//         $message->to('mesa.app.mail@gmail.com')->subject('Test Email');
-//     });
-
-//     return 'Email sent!';
-// });
+Route::get('/test', function () {
+    return view('test');
+});

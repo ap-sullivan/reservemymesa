@@ -12,14 +12,26 @@ use Illuminate\View\View;
 class ProfileController extends Controller
 {
     /**
-     * Display the user's profile form.
+     * Display the user's profile form and upcoming reservations.
      */
-    public function edit(Request $request): View
-    {
-        return view('profile.edit', [
-            'user' => $request->user(),
-        ]);
-    }
+  public function edit(Request $request): View
+{
+    $user = $request->user();
+
+    $upcomingReservations = $user->reservations()
+        ->whereDate('reservation_date', '>=', now())
+        ->orderBy('reservation_date')
+        ->orderBy('reservation_time')
+        ->get();
+
+    return view('profile.edit', [
+        'user' => $user,
+        'upcomingReservations' => $upcomingReservations,
+    ]);
+}
+
+
+
 
     /**
      * Update the user's profile information.
@@ -57,4 +69,6 @@ class ProfileController extends Controller
 
         return Redirect::to('/');
     }
+
+
 }

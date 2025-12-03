@@ -1,6 +1,6 @@
-@extends('layouts.app')
 
-@section('content')
+
+<x-app-layout>
 <div class="max-w-xl mx-auto mt-10 bg-white rounded-lg shadow p-6 text-center">
 
     @if(session('success'))
@@ -21,4 +21,5 @@
     </a>
 
 </div>
-@endsection
+
+</x-app-layout>

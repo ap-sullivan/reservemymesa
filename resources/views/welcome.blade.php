@@ -13,10 +13,63 @@
     <!-- Navbar -->
     @include('layouts.navigation')
 
+
     <!-- Page Content -->
     <main class=" min-h-screen p-16">
 
-<p class="text-white mb-4"> TODO : add a JS frontend filter by cuisine and city</p>
+<div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow mb-10 max-w-4xl mx-auto">
+    <form method="GET" action="{{ route('home') }}" class="grid grid-cols-1 md:grid-cols-4 gap-4">
+
+
+        <!--cuisine filter -->
+        <div>
+            <label class="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">
+                Cuisine
+            </label>
+            <select name="cuisine" class="w-full rounded-lg border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-white focus:ring-pink-500 focus:border-pink-500">
+                <option value="">All</option>
+                @foreach ($cuisines as $cuisine)
+                    <option value="{{ $cuisine }}" {{ request('cuisine') === $cuisine ? 'selected' : '' }}>
+                        {{ $cuisine }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
+
+        <!--city filter -->
+        <div>
+            <label class="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">
+                City
+            </label>
+            <select name="city" class="w-full rounded-lg border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-white focus:ring-pink-500 focus:border-pink-500">
+                <option value="">All</option>
+                @foreach ($cities as $city)
+                    <option value="{{ $city }}" {{ request('city') === $city ? 'selected' : '' }}>
+                        {{ $city }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
+
+        <!-- apply filter -->
+        <div class="flex items-end">
+            <button
+                class="w-full bg-pink-500 text-white py-2 px-4 rounded-lg font-semibold hover:bg-pink-600 shadow">
+                Apply Filters
+            </button>
+        </div>
+        {{-- clear button --}}
+        <div class="flex items-end">
+    <a
+        href="{{ route('home') }}"
+        class="w-full text-center bg-gray-300 text-gray-800 py-2 px-4 rounded-lg font-semibold hover:bg-gray-400 shadow"
+    >
+        Clear
+    </a>
+</div>
+
+    </form>
+</div>
 
  {{-- card container --}}
 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12">
@@ -54,7 +107,7 @@
     </div>
 </div>
 
-{{-- Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate repudiandae necessitatibus laborum voluptas ut consequuntur non reprehenderit, maxime placeat reiciendis atque nihil cupiditate accusantium magni dolores voluptates expedita voluptatem accusamus? --}}
+
   @endforeach
 
 </div>
@@ -66,6 +119,6 @@
 
 </main>
 
-
+    @include('layouts.footer')
 </body>
 </html>
