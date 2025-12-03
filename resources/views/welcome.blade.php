@@ -26,7 +26,7 @@
             <label class="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">
                 Cuisine
             </label>
-            <select name="cuisine" class="w-full rounded-lg border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-white focus:ring-pink-500 focus:border-pink-500">
+            <select name="cuisine" class="w-full rounded-lg border-gray-700 bg-gray-900 text-white focus:ring-pink-500 focus:border-pink-500">
                 <option value="">All</option>
                 @foreach ($cuisines as $cuisine)
                     <option value="{{ $cuisine }}" {{ request('cuisine') === $cuisine ? 'selected' : '' }}>
@@ -41,7 +41,7 @@
             <label class="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">
                 City
             </label>
-            <select name="city" class="w-full rounded-lg border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-white focus:ring-pink-500 focus:border-pink-500">
+            <select name="city" class="w-full rounded-lg border-gray-700 bg-gray-900 text-white focus:ring-pink-500 focus:border-pink-500">
                 <option value="">All</option>
                 @foreach ($cities as $city)
                     <option value="{{ $city }}" {{ request('city') === $city ? 'selected' : '' }}>

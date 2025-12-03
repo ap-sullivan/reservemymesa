@@ -11,11 +11,11 @@
     <!-- Navbar -->
     @include('layouts.navigation')
 
-    <main class="bg-primary-lightest">
+    <main class="bg-off-white">
         <div class="pb-8">
         <div class="flex justify-center items-center">
-            <h1 class="pt-4 text-2xl font-semibold md:text-4xl text-black capitalize mt-6 mb-4">
-                Edit<span class=text-secondary> {{ $restaurant->name }}</span>
+            <h1 class="pt-4 text-2xl font-semibold md:text-4xl hover:bg-pink-300 capitalize mt-6 mb-4">
+                Edit<span class="text-pink-500 font-bold"> {{ $restaurant->name }}</span>
             </h1>
 
         </div>
@@ -38,7 +38,7 @@
                   method="POST" enctype="multipart/form-data"
                   action="{{ route('admin.restaurants.update', $restaurant->restaurant_id) }}"
 
-             class="w-full max-w-2xl bg-white shadow-lg rounded-lg p-8 space-y-6 border border-primary">
+             class="w-full max-w-3xl bg-gray-800 shadow-lg md:rounded-lg p-8 p-8 space-y-6 border border-primary">
 
 
             {{-- cross site request forgery protection  --}}
@@ -46,26 +46,26 @@
             @method('PUT')
 
                  <div class="flex flex-col mb-2">
-                    <label for="name" class="mb-1 required">Restaurant Name</label>
+                    <label for="name" class="text-white mb-1 required">Restaurant Name</label>
                     <input type="text" name="name" id="name" placeholder="Tasty Restaurant" required x-model="name"
                             @input="slug = name
                     .toLowerCase()
                     .replace(/[^a-z0-9]+/g, '-')
                     .replace(/^-+|-+$/g, '')"
-                        class="w-full h-12 py-2 px-2 rounded bg-white border-2 border-secondary-light text-black placeholder-darkest-grey focus:bg-secondary-lightest focus:outline-none focus:border-none focus:ring-secondary-light" />
+                        class="w-full h-12 py-2 px-2 rounded bg-white border-2 border-gray-700 bg-gray-900 text-white focus:ring-pink-500 focus:border-pink-500" />
                 </div>
 
 
                  <div class="flex flex-col mb-2">
-                    <label for="slug" class="mb-1 required">Suggested URL Slug</label>
+                    <label for="slug" class="text-white mb-1 required">Suggested URL Slug</label>
                     <input type="text" name="slug" id="slug" placeholder="Only change if the slug URL is duplicated" required  x-model="slug"
-                        class="w-full h-12 py-2 px-2 rounded bg-white border-2 border-primary text-black placeholder-darkest-grey focus:bg-tertiary-subtle focus:border-2 focus:border-tertiary focus:outline-none" />
+                        class="w-full h-12 py-2 px-2 rounded bg-white border-2 border-gray-700 bg-gray-900 text-white focus:ring-pink-500 focus:border-pink-500" />
                 </div>
 
-               <div class="flex flex-col mb-6 text-black">
-                        <label for="cuisine_type" class="mb-1 required">Cuisine Type</label>
+               <div class="flex flex-col mb-6">
+                        <label for="cuisine_type" class="text-white mb-1 required">Cuisine Type</label>
                         <select id="cuisine_type" name="cuisine_type" x-model="cuisine_type"
-                            class="tracking-wide border-2 border-primary focus:bg-tertiary-subtle focus:border-2 focus:border-tertiary focus:outline-none hover:cursor-pointer">
+                            class="border-gray-700 bg-gray-900 text-white focus:ring-pink-500 focus:border-pink-500">
                             <optgroup label="Main Cuisine Served">
                                 <option value="not-specified">Select a cuisine</option>
                                 @foreach ($cuisines as $cuisine)
@@ -77,77 +77,74 @@
                     </div>
 
                 <div class="md:col-span-2">
-                    <label for="description" class="mb-1 required">Restaurant Description</label>
-                    <textarea rows="6" name="description" id="description"
+                    <label for="description" class=" text-white mb-1 required">Restaurant Description</label>
+                    <textarea rows="8" name="description" id="description"
                         placeholder="A brief description of the restaurant - keep to 100-150 words max" x-model="description" required
-                        class="w-full h-32 py-2 px-2 rounded bg-white border-2 border-primary text-black placeholder-darkest-grey focus:bg-tertiary-subtle focus:border-2 focus:border-tertiary focus:outline-none"></textarea>
+                        class="w-full h-44 py-2 px-2 rounded bg-white border-2 border-gray-700 bg-gray-900 text-white focus:ring-pink-500 focus:border-pink-500"></textarea>
                 </div>
 
                  <div class="flex flex-col mb-2">
-                    <label for="house_number" class="mb-1">Street Number</label>
+                    <label for="house_number" class="text-white mb-1">Street Number</label>
                     <input type="text" name="house_number" id="house_number" placeholder="10" x-model="house_number"
-                        class="w-full h-12 py-2 px-2 rounded bg-white border-2 border-primary text-black placeholder-darkest-grey focus:bg-tertiary-subtle focus:border-2 focus:border-tertiary focus:outline-none" />
+                        class="w-full h-12 py-2 px-2 rounded bg-white border-2 border-gray-700 bg-gray-900 text-white focus:ring-pink-500 focus:border-pink-500" />
                 </div>
 
                 <div class="flex flex-col mb-2">
-                    <label for="address_line_1" class="mb-1 required">Address Line 1</label>
+                    <label for="address_line_1" class="text-white mb-1 required">Address Line 1</label>
                     <input type="text" name="address_line_1" id="address_line_1" placeholder="Downing Street" required
-                       x-model="address_line_1" class="w-full h-12 py-2 px-2 rounded bg-white border-2 border-primary text-black placeholder-darkest-grey focus:bg-tertiary-subtle focus:border-2 focus:border-tertiary focus:outline-none" />
+                       x-model="address_line_1" class="w-full h-12 py-2 px-2 rounded bg-white border-2 border-gray-700 bg-gray-900 text-white focus:ring-pink-500 focus:border-pink-500" />
                 </div>
 
                    <div class="flex flex-col mb-2">
-                    <label for="address_line_2" class="mb-1">Address Line 2</label>
+                    <label for="address_line_2" class="text-white mb-1">Address Line 2</label>
                     <input type="text" name="address_line_2" id="address_line_2" placeholder=""
-                        x-model="address_line_2" class="w-full h-12 py-2 px-2 rounded bg-white border-2 border-primary text-black placeholder-darkest-grey focus:bg-tertiary-subtle focus:border-2 focus:border-tertiary focus:outline-none" />
+                        x-model="address_line_2" class="w-full h-12 py-2 px-2 rounded bg-white border-2 border-gray-700 bg-gray-900 text-white focus:ring-pink-500 focus:border-pink-500" />
                 </div>
 
                    <div class="flex flex-col mb-2">
-                    <label for="city" class="mb-1 required">City</label>
+                    <label for="city" class="text-white mb-1 required">City</label>
                     <input type="text" name="city" id="city" placeholder="e.g. Glasgow"
                     x-model="city" required
-                        class="w-full h-12 py-2 px-2 rounded bg-white border-2 border-primary text-black placeholder-darkest-grey focus:bg-tertiary-subtle focus:border-2 focus:border-tertiary focus:outline-none" />
+                        class="w-full h-12 py-2 px-2 rounded bg-white border-2 border-gray-700 bg-gray-900 text-white focus:ring-pink-500 focus:border-pink-500" />
                 </div>
 
                   <div class="flex flex-col mb-2">
-                    <label for="postcode" class="mb-1 required">Post Code</label>
+                    <label for="postcode" class="text-white mb-1 required">Post Code</label>
                     <input type="text" name="postcode" id="postcode" placeholder="e.g. G3 8EP" x-model="postcode" required
-                        class="w-full h-12 py-2 px-2 rounded bg-white border-2 border-primary text-black placeholder-darkest-grey focus:bg-tertiary-subtle focus:border-2 focus:border-tertiary focus:outline-none" />
+                        class="w-full h-12 py-2 px-2 rounded bg-white border-2 border-gray-700 bg-gray-900 text-white focus:ring-pink-500 focus:border-pink-500" />
                 </div>
 
                 <div class="flex flex-col mb-2">
-                    <label for="email" class="mb-1 required">Email</label>
+                    <label for="email" class="text-white mb-1 required">Email</label>
                     <input type="email" name="email" id="email" placeholder="e.g. hello@world.com" x-model="email" required
-                        class="w-full h-12 py-2 px-2 rounded bg-white border-2 border-primary text-black placeholder-darkest-grey focus:bg-tertiary-subtle focus:border-2 focus:border-tertiary focus:outline-none" />
+                        class="w-full h-12 py-2 px-2 rounded bg-white border-2 border-gray-700 bg-gray-900 text-white focus:ring-pink-500 focus:border-pink-500" />
                 </div>
 
                      <div class="flex flex-col mb-2">
-                    <label for="phone" class="mb-1 required">Phone Number</label>
+                    <label for="phone" class="text-white mb-1 required">Phone Number</label>
                     <input type="tel" name="phone" id="phone" placeholder="e.g. 0141 123 4567" x-model="phone" required
-                        class="w-full h-12 py-2 px-2 rounded bg-white border-2 border-primary text-black placeholder-darkest-grey focus:bg-tertiary-subtle focus:border-2 focus:border-tertiary focus:outline-none" />
+                        class="w-full h-12 py-2 px-2 rounded bg-white border-2 border-gray-700 bg-gray-900 text-white focus:ring-pink-500 focus:border-pink-500" />
                 </div>
 
                  <div class="flex flex-col mb-2">
-                    <label for="main_contact" class="mb-1">Main Contact Name</label>
+                    <label for="main_contact" class="text-white mb-1">Main Contact Name</label>
                     <input type="text" name="main_contact" id="main contact" placeholder="" x-model="main_contact"
-                        class="w-full h-12 py-2 px-2 rounded bg-white border-2 border-primary text-black placeholder-darkest-grey focus:bg-tertiary-subtle focus:border-2 focus:border-tertiary focus:outline-none" />
+                        class="w-full h-12 py-2 px-2 rounded bg-white border-2 border-gray-700 bg-gray-900 text-white focus:ring-pink-500 focus:border-pink-500" />
                 </div>
 
 
                 <div class="">
                     <div class="flex flex-col mb-3">
-                        <label for="path" class="mb-1">Upload a photo</label>
+                        <label for="path" class="text-white mb-1">Upload a photo</label>
                         <input type="file" name="path" placeholder=""
-                            class="w-1/2 h-14 py-2 px-2 flex justify-center rounded bg-white border-2 border-primary text-black placeholder-darkest-grey focus:bg-tertiary-subtle focus:border-2 focus:border-tertiary focus:outline-none">
+                            class="w-1/2 h-14 py-2 px-2 flex justify-center rounded bg-white border-2 border-gray-700 bg-gray-900 text-white focus:ring-pink-500 focus:border-pink-500">
                     </div>
 
                     <button type="submit"
-                        class="md:w-32 bg-secondary hover:bg-secondary-light text-black font-medium py-2 px-4 rounded mt-4 transition ease-in-out duration-300">
+                        class="md:w-32 mt-4 rounded-lg bg-pink-500 py-3 px-6 text-xs font-bold uppercase text-white shadow-md transition-all hover:shadow-lgtransition ease-in-out duration-300">
                         Submit
                     </button>
                 </div>
-
-
-
 
             </form>
         </div>

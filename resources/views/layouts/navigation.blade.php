@@ -1,7 +1,5 @@
 {{-- logged in user nav --}}
 @auth
-
-
     <nav x-data="{ open: false }" class="bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
         <!-- Primary Navigation Menu -->
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -21,11 +19,32 @@
                             {{ __('Home') }}
                         </x-nav-link>
                     </div>
-                     <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                        <x-nav-link :href="route('admin.restaurants.create')" :active="request()->routeIs('admin.restaurants.create')">
-                            {{ __('Add Restaurant') }}
-                        </x-nav-link>
-                    </div>
+
+                    {{-- only show link if role is equal to customer --}}
+                    @if (Auth::user()->role === 'customer')
+                        <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                            <x-nav-link :href="route('profile.edit')" :active="request()->routeIs('profile.edit')">
+                                {{ __('View Reservations') }}
+                            </x-nav-link>
+                        </div>
+                    @endif
+
+
+                    {{-- only show link if role is equal to admin --}}
+                    @if (Auth::user()->role === 'admin')
+                        <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                            <x-nav-link :href="route('admin.restaurants.create')" :active="request()->routeIs('admin.restaurants.create')">
+                                {{ __('Add Restaurant') }}
+                            </x-nav-link>
+                        </div>
+
+                        <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                            <x-nav-link :href="route('admin.restaurants.index')" :active="request()->routeIs('admin.restaurants.index')">
+                                {{ __('Edit Restaurant') }}
+                            </x-nav-link>
+                        </div>
+                    @endif
+
                 </div>
 
                 <!-- Settings Dropdown -->
@@ -34,7 +53,8 @@
                         <x-slot name="trigger">
                             <button
                                 class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
-                                <div>{{ Auth::user()->name }}</div>
+                                <div>{{ Auth::user()->name ?? 'Guest' }}</div>
+
 
                                 <div class="ms-1">
                                     <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
@@ -84,11 +104,20 @@
 
         <!-- Responsive Navigation Menu -->
         <div :class="{ 'block': open, 'hidden': !open }" class="hidden sm:hidden">
-            <div class="pt-2 pb-3 space-y-1">
+            <div class="pt-2 pb-1 space-y-1">
                 <x-responsive-nav-link :href="route('home')" :active="request()->routeIs('home')">
-                    {{ __('home') }}
+                    {{ __('Home') }}
                 </x-responsive-nav-link>
             </div>
+            @auth
+            @if (Auth::user()->role === 'customer')
+                <div class=" pb-3 pb-1 space-y-1">
+                    <x-responsive-nav-link :href="route('profile.edit')" :active="request()->routeIs('[profile.edit]')">
+                        {{ __('View Reservations') }}
+                    </x-responsive-nav-link>
+                </div>
+            @endif
+            @endauth
 
             <!-- Responsive Settings Options -->
             <div class="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">
@@ -129,15 +158,17 @@
                     <!-- Logo -->
                     <div class="shrink-0 flex items-center">
                         <a href="{{ route('home') }}">
-                            <x-application-logo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
+
+                            <img src="{{ asset('/logo/mesa_logo.png') }}" alt="Logo" class="block h-16 w-auto">
                         </a>
                     </div>
 
                     <!-- Navigation Links -->
                     <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                        <x-nav-link :href="route('home')" :active="request()->routeIs('home')">
+                        {{-- <x-nav-link :href="route('home')" :active="request()->routeIs('home')">
                             {{ __('Welcome Guest') }}
-                        </x-nav-link>
+                        </x-nav-link> --}}
+
                     </div>
                 </div>
 
@@ -147,7 +178,7 @@
                         <x-slot name="trigger">
                             <button
                                 class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
-                                {{-- <div>{{ Auth::user()->name }}</div> --}}
+                                <div>{{ Auth::user()->name ?? 'Welcome Guest' }}</div>
 
                                 <div class="ms-1">
                                     <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
@@ -190,11 +221,20 @@
 
         <!-- Responsive Navigation Menu -->
         <div :class="{ 'block': open, 'hidden': !open }" class="hidden sm:hidden">
-            <div class="pt-2 pb-3 space-y-1">
+            <div class="pt-2 pb-1 space-y-1">
                 <x-responsive-nav-link :href="route('home')" :active="request()->routeIs('home')">
-                    {{ __('home') }}
+                    {{ __('Home') }}
                 </x-responsive-nav-link>
             </div>
+            @auth
+            @if (Auth::user()->role === 'customer')
+                <div class=" pb-3 space-y-1">
+                    <x-responsive-nav-link :href="route('profile.edit')" :active="request()->routeIs('[profile.edit]')">
+                        {{ __('View Reservations') }}
+                    </x-responsive-nav-link>
+                </div>
+            @endif
+            @endauth
 
             <!-- Responsive Settings Options -->
             <div class="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">

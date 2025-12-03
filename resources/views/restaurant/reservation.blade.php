@@ -43,7 +43,7 @@
 
                     {{-- Date --}}
                     <h3 class="text-lg font-semibold mb-3">Select Date</h3>
-                    <input type="date" name="reservation_date" x-ref="date" class="mb-6 p-2 border rounded-lg"
+                    <input type="date" name="reservation_date" x-ref="date" class="mb-6 p-2 border rounded-lg focus:ring-pink-500 focus:border-pink-500"
                         min="{{ now()->toDateString() }}" />
 
                     {{-- Time --}}
@@ -77,7 +77,7 @@
 
                     {{-- Guests --}}
                     <h3 class="text-lg font-semibold mb-3 mt-6">Number of Guests</h3>
-                    <select name="pax_count" id="pax_count" x-ref="pax" class="p-2 border rounded-lg w-40">
+                    <select name="pax_count" id="pax_count" x-ref="pax" class="p-2 border rounded-lg w-40 focus:ring-pink-500 focus:border-pink-500">
                         @for ($i = 1; $i <= 10; $i++)
                             <option value="{{ $i }}">
                                 {{ $i }} Guest{{ $i > 1 ? 's' : '' }}
@@ -88,7 +88,7 @@
                     {{-- Special requests --}}
                     <h3 class="text-lg font-semibold mb-3 mt-6">Special Requests</h3>
                     <textarea name="requests" id="requests" rows="4" x-ref="requests"
-                        class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-400"
+                        class="w-full p-3 border rounded-lg focus:outline-none focus:ring-pink-500 focus:border-pink-500"
                         placeholder="Let us know about any allergies, seating preference or if you're celebrating etc..."></textarea>
 
                     <button type="button" @click="openModal()"
@@ -102,17 +102,24 @@
         {{-- modal --}}
         <div x-show="open" x-cloak x-transition.opacity
             class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 bg-black/40 backdrop-blur-md">
-            <div class=" bg-white rounded-lg shadow-xl w-11/12 md:w-1/2  max-w-4xl p-6
+            <div class=" bg-white rounded-lg shadow-xl w-11/12 md:w-1/2  max-w-2xl p-6
                 ">
-                <h2 class="text-xl font-bold mb-4">Confirm Reservation</h2>
-
-                <div class="space-y-2 text-gray-700">
+                <div class="flex flex-col">
+                <h2 class="text-xl font-bold mb-4 ">Confirm Reservation</h2>
+                <div class=" h-auto mt-2" >
+                <div class="space-y-2 text-gray-700 mr-8 ">
                     <p><strong>Date:</strong> <span x-text="summary.date"></span></p>
                     <p><strong>Time:</strong> <span x-text="summary.time"></span></p>
                     <p><strong>Guests:</strong> <span x-text="summary.pax"></span></p>
                     <p><strong>Requests:</strong> <span x-text="summary.requests"></span></p>
                 </div>
 
+            </div>
+                {{-- <div class="relative h-64 overflow-hidden md:rounded-t-xl bg-blue-gray-500 bg-clip-border text-white">
+                <img src="{{ $restaurant->images->first() ? asset('storage/' . $restaurant->images->first()->path) : asset('default.jpg') }}"
+                    alt="image of {{ $restaurant->name }}" class="object-cover w-full h-full" />
+            </div> --}}
+        </div>
                 <div class="mt-6 flex justify-end gap-3">
                     <button class="px-4 py-2 bg-gray-300 rounded" @click="open = false">
                         Cancel
@@ -163,25 +170,12 @@
 
                     this.$refs.resForm.submit();
 
-                    //           console.log("DEBUG: Modal confirm clicked.");
-                    // console.log("Submitting form...", this.$refs.resForm);
-                    // console.log("Form action:", this.$refs.resForm.action);
-
-                    // const fd = new FormData(this.$refs.resForm);
-                    // for (const [key, value] of fd.entries()) {
-                    //     console.log("FIELD:", key, value);
-                    // }
-
-
-
-                    // alert("STOP — Debug mode: Form NOT submitted.");
-                    // return;
                 }
             };
         }
     </script>
 
-    {{-- Optional: x-cloak helper (prevents flash of modal on page load) --}}
+
     <style>
         [x-cloak] {
             display: none !important;
