@@ -23,7 +23,8 @@
 @foreach ($restaurants as $restaurant)
 
     {{-- card --}}
-   <div class="relative flex flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-md">
+<div class="relative flex flex-col h-full rounded-xl bg-white bg-clip-border text-gray-700 shadow-md">
+
     <div class="relative h-56 overflow-hidden rounded-t-xl bg-blue-gray-500 bg-clip-border text-white">
       <img
      src="{{ optional($restaurant->images->first())->path
@@ -33,7 +34,7 @@
     class="object-cover w-full h-full"
 />
     </div>
-    <div class="p-6">
+    <div class="p-6 flex-1">
        <h5 class="text-xl font-semibold text-blue-gray-900 mb-1">
                     {{ $restaurant->name }}
         </h5>
@@ -45,9 +46,7 @@
             {{ $restaurant->description }}
         </p>
     </div>
-    <div class="p-6 pt-0">
-
-
+    <div class="p-6 pt-0 mt-auto">
 
         <a href="{{ route('restaurants.reservation', ['slug' => $restaurant->slug]) }}" class="rounded-lg bg-pink-500 py-3 px-6 text-xs font-bold uppercase text-white shadow-md transition-all hover:shadow-lg">
             Make Reservation
@@ -55,6 +54,7 @@
     </div>
 </div>
 
+{{-- Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate repudiandae necessitatibus laborum voluptas ut consequuntur non reprehenderit, maxime placeat reiciendis atque nihil cupiditate accusantium magni dolores voluptates expedita voluptatem accusamus? --}}
   @endforeach
 
 </div>

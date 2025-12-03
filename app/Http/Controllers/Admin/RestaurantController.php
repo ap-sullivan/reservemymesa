@@ -48,6 +48,13 @@ class RestaurantController extends Controller
             'email' => 'required|email|unique:restaurants,email',
             'phone' => 'nullable|string|max:20',
             'main_contact' => 'nullable|string|max:128',
+            //file validation
+             'path' => [
+            'nullable',
+            'file',
+            'mimes:jpeg,png,jpg,webp',
+            'max:2048',
+    ],
         ]);
 
         // ? create variable to link to restaurant id
@@ -63,7 +70,7 @@ class RestaurantController extends Controller
             $upload = new ImageUpload;
             $upload->mime_type = $file->getMimeType();
             $upload->original_name = $file->getClientOriginalName();
-           $upload->path = $file->store('uploads', 'public');
+            $upload->path = $file->store('uploads', 'public');
             $upload->restaurant_id = $restaurant->restaurant_id;
             $upload->save();
         }
@@ -110,7 +117,15 @@ public function update(Request $request, $id)
         'email' => 'required|email',
         'phone' => 'nullable|string|max:20',
         'main_contact' => 'nullable|string|max:128',
+        'path' => [
+            'nullable',
+            'file',
+            'mimes:jpeg,png,jpg, webp',
+            'max:2048',
+        ],
     ]);
+
+
 
 
     $restaurant->update($validated);
