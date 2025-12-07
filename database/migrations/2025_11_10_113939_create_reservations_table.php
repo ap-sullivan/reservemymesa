@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('reservations', function (Blueprint $table) {
             $table->id('reservation_id');
-            $table->unsignedBigInteger('restaurant_id'); // foreign key to restaurant table
-            $table->unsignedBigInteger('customer_id');   // fk to customer table
-            $table->unsignedBigInteger('time_slot_id');  // fk to the time slot table
+            $table->unsignedBigInteger('restaurant_id');
+            $table->unsignedBigInteger('customer_id');
+            $table->unsignedBigInteger('time_slot_id');
             $table->integer('pax_count');
             $table->text('requests')->nullable();
             $table->timestamps();

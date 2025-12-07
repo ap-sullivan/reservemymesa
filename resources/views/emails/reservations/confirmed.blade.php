@@ -5,9 +5,6 @@
     $formattedTime = \Carbon\Carbon::parse($reservation->reservation_time)->format('g:i A');
 @endphp
 
-
-
-
 # Your Table Reservation is Confirmed
 
 Thank you for your reservation at **{{ $reservation->restaurant->name }}**!

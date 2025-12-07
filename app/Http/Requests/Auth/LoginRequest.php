@@ -50,7 +50,7 @@ class LoginRequest extends FormRequest
             ]);
         }
 
-        // extra steps for athorising an admin user checking aagainst db that the role == admin and the secret code matches the user if user is admin
+        // extra steps for athorising an admin user checking against db that the role == admin and the secret code matches the user if user is admin
 
            $user = Auth::user();
 

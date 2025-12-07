@@ -39,5 +39,20 @@ class ReservationController extends Controller
     ->with('success', 'Your reservation has been confirmed!');
 }
 
+// remove reservation
+
+public function destroy($id)
+{
+    $reservation = Reservation::where('reservation_id', $id)
+        ->where('customer_id', Auth::id())
+        ->firstOrFail();
+
+    $reservation->delete();
+
+    return redirect()
+        ->back()
+        ->with('success', 'Reservation cancelled successfully.');
+}
+
 
 }

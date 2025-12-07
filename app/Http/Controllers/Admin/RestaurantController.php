@@ -30,8 +30,6 @@ class RestaurantController extends Controller
 }
 
 
-
-
     //? validating form data on submit/store to db
     public function store(Request $request)
     {
@@ -58,14 +56,13 @@ class RestaurantController extends Controller
         ]);
 
         // ? create variable to link to restaurant id
+
         $restaurant = Restaurant::create($validated);
 
 
         //?  then store image and reference path, names, type and and restaurant id as fk in db
         if ($request->hasFile('path')) {
             $file = $request->file('path');
-
-            // dd($request->file('path'));
 
             $upload = new ImageUpload;
             $upload->mime_type = $file->getMimeType();

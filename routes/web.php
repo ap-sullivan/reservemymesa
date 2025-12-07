@@ -53,7 +53,6 @@ Route::delete('/admin/restaurants/{id}', [RestaurantController::class, 'destroy'
 
 
 // ? Reservations route
-
 Route::middleware('auth', 'verified')->post('/reservations', [ReservationController::class, 'store'])
     ->name('reservations.store');
 
@@ -61,6 +60,12 @@ Route::middleware('auth', 'verified')->post('/reservations', [ReservationControl
 Route::get('/reservation/confirmation', function () {
     return view('restaurant.confirmation');
 })->name('reservations.confirmation');
+
+// ? route for deleting restaurant reservation
+Route::middleware(['auth', 'verified'])->delete('/reservations/{id}', [
+    ReservationController::class,
+    'destroy'
+])->name('reservations.destroy');
 
 
 

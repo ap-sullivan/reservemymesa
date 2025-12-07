@@ -13,9 +13,8 @@ return new class extends Migration
 
     {
 
-         Schema::dropIfExists('reservations');
+        Schema::dropIfExists('reservations');
 
-         
         Schema::create('restaurants', function (Blueprint $table) {
             $table->id('restaurant_id');
             $table->string('name', 128);
